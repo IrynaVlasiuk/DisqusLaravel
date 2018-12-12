@@ -1,0 +1,21 @@
+.textarea-message {
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 100px;
+    width: 525px;
+}
+
+.container .title {
+    font-size: 21px;
+    text-align: center;
+}
+
+.btn-add-comment {
+    width: 105px;
+    height: 35px;
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin-left: 33px;
+    background-color: DarkMagenta;
+}
