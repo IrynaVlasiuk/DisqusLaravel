@@ -94,6 +94,7 @@
 
                     function renderElements(elements, parentDiv) {
                         var user_id = {!! Auth::user()->id !!};
+                        console.log(elements);
                         for(var i in elements){
                             if(elements[i].user_id == user_id) {
                                 parentDiv.append('<div class="msg-container"><input class="input-hidden"/><div class="msg">'+ elements[i].message +'</div>'

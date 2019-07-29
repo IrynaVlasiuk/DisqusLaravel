@@ -53,7 +53,7 @@ $(document).ready(function(){
             $('.info-msg-error').text(data.message.message[0]);
         }
         else {
-            window.location.href = "http://localhost/home";
+            window.location.href = "/home";
         }
     }
 

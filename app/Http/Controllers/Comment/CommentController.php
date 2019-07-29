@@ -46,12 +46,6 @@ class CommentController extends Controller
         if ($validator->fails()) {
             return response()->json(["message" => $validator->errors(), "status" => 400]);
         } else {
-            try {
-                DB::connection()->getPdo();
-            } catch (\Exception $e) {
-                return response()->json(["message" =>$e->getMessage(), "status" => $e->getCode()]);
-            }
-
             $comment = Comment::create([
                 'message' => $request->get('message'),
                 'user_id' => Auth::user()->id,
@@ -71,11 +65,13 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $replies = DB::table('comments')
-            ->leftJoin('ratings', 'comments.id', '=', 'ratings.comment_id')
-            ->select('comments.id AS id', 'comments.message AS message', 'comments.updated_at AS updated_at','comments.user_id AS user_id', DB::raw("count(ratings.id) AS count"))
-            ->where('comments.parent_id', $id)->groupBy('id','message','updated_at', 'user_id')
-            ->get();
+
+        $replies = Comment::where('parent_id', $id)->get();
+
+        foreach ($replies as $reply) {
+            $reply->count = $reply->getRatingCount();
+
+        }
         return response()->json(["data" => $replies]);
     }
 

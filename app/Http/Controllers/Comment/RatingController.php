@@ -38,11 +38,6 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            DB::connection()->getPdo();
-        } catch (\Exception $e) {
-            return response()->json(["message" =>$e->getMessage(), "status" => $e->getCode()]);
-        }
         if(Rating::where('user_id', '=', Auth::user()->id)->where('comment_id', '=', $request->get('comment_id'))->exists()){
             return response()->json(["message" => "You can`t rate the same comment again", "status" => 400]);
         } else {

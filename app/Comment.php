@@ -19,4 +19,9 @@ class Comment extends Model
     {
         return $this->hasMany(Rating::class);
     }
+
+    public function getRatingCount()
+    {
+        return $this->ratings()->count();
+    }
 }
